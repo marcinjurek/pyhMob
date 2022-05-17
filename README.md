@@ -14,8 +14,8 @@ python -m pip install pyhMob
 
 ## Usage
 
-It is recommended to explore the individual scripts to get an idea of the capabilities of the package. As a simple example let us generate a sample trajectory from the model. The way to do it is shown in the `scripts/exploratory/draw-sample-trajectories.py` file pasted below
-```{python}
+It is recommended to explore the individual scripts to get an idea of the capabilities of the package. As a simple example let us generate a sample trajectory from the model. The way to do it is shown in the `scripts/exploratory/draw-sample-trajectories.py` file pasted below.
+```python
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from pyhMob.plotting import getAxesWithTrajectory
