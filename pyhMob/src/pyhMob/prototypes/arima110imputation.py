@@ -1,7 +1,6 @@
-import pdb
 import numpy as np
-from scipy.stats import norm
-import matplotlib.pyplot as plt
+# from scipy.stats import norm
+# import matplotlib.pyplot as plt
 
 
 def smooth(E, H, Q, R, mu0, Sig0, obs):
@@ -42,63 +41,63 @@ def smooth(E, H, Q, R, mu0, Sig0, obs):
     return(mu_smooth, sig_smooth)
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    T = 1000
-    RHO = 0.9
-    SIG = 1
-    gapStart = 30  # index of the first unavailable obs
-    gapEnd = 500  # index of the first available obs after the gap
+#     T = 1000
+#     RHO = 0.9
+#     SIG = 1
+#     gapStart = 30  # index of the first unavailable obs
+#     gapEnd = 500  # index of the first available obs after the gap
 
-    # # simulate data
-    nu = norm.rvs(0, scale=SIG, size=T)
-    delta = np.zeros(T)
-    for t in range(1, T):
-        delta[t] = RHO * delta[t - 1] + nu[t]
-    x = np.cumsum(delta)  
+#     # # simulate data
+#     nu = norm.rvs(0, scale=SIG, size=T)
+#     delta = np.zeros(T)
+#     for t in range(1, T):
+#         delta[t] = RHO * delta[t - 1] + nu[t]
+#     x = np.cumsum(delta)  
 
-    gapLength = gapEnd - gapStart
+#     gapLength = gapEnd - gapStart
 
-    A = np.matrix([[1, RHO], [0, RHO]])
-    H = np.matrix([[1, 0]])
-    Q = (SIG ** 2) * np.matrix([[1, 1], [1, 1]])
-    R = 0
-    mu0 = np.matrix([[x[gapStart - 1]], [x[gapStart - 1] - x[gapStart - 2]]])
-    Sig0 = np.zeros((2, 2))
-    obs = np.nan * np.zeros(gapLength + 2)
-    obs[-2:] = x[gapEnd:(gapEnd + 1)]
+#     A = np.matrix([[1, RHO], [0, RHO]])
+#     H = np.matrix([[1, 0]])
+#     Q = (SIG ** 2) * np.matrix([[1, 1], [1, 1]])
+#     R = 0
+#     mu0 = np.matrix([[x[gapStart - 1]], [x[gapStart - 1] - x[gapStart - 2]]])
+#     Sig0 = np.zeros((2, 2))
+#     obs = np.nan * np.zeros(gapLength + 2)
+#     obs[-2:] = x[gapEnd:(gapEnd + 1)]
 
-    # xA = np.zeros((2, T))
-    # xA[:, 1] = np.array([delta[1], delta[1]])
-    # for t in range(2, T):
-    #     xm = np.matrix(xA[:, t - 1]).T
-    #     num = np.matrix([[nu[t], nu[t]]]).T
-    #     next_xm = A * xm + num
-    #     xA[:, t] = np.array(next_xm).ravel()
+#     # xA = np.zeros((2, T))
+#     # xA[:, 1] = np.array([delta[1], delta[1]])
+#     # for t in range(2, T):
+#     #     xm = np.matrix(xA[:, t - 1]).T
+#     #     num = np.matrix([[nu[t], nu[t]]]).T
+#     #     next_xm = A * xm + num
+#     #     xA[:, t] = np.array(next_xm).ravel()
 
-    # xA = xA[0, :]
+#     # xA = xA[0, :]
     
-    # Generate several examples to check if things look good
-    fig = plt.figure()
-    for i in range(9):
-        nu_hat = norm.rvs(0, scale=SIG, size=gapLength + 2)
-        eps_hat = np.zeros(gapLength + 2)
-        for t in range(1, gapLength + 2):
-            eps_hat[t] = RHO * eps_hat[t - 1] + nu_hat[t]
-        x_hat = np.cumsum(eps_hat)
-        y_hat = np.nan * eps_hat
-        y_hat[-2:] = x_hat[-2:]
+#     # Generate several examples to check if things look good
+#     fig = plt.figure()
+#     for i in range(9):
+#         nu_hat = norm.rvs(0, scale=SIG, size=gapLength + 2)
+#         eps_hat = np.zeros(gapLength + 2)
+#         for t in range(1, gapLength + 2):
+#             eps_hat[t] = RHO * eps_hat[t - 1] + nu_hat[t]
+#         x_hat = np.cumsum(eps_hat)
+#         y_hat = np.nan * eps_hat
+#         y_hat[-2:] = x_hat[-2:]
 
-        y_hat_star = obs - y_hat
+#         y_hat_star = obs - y_hat
 
-        muS, sigS = smooth(A, H, Q, R, mu0, Sig0, y_hat_star)
-        mu = np.array([m[0, 0] for m in muS])
-        x_samp = x_hat + mu
-        x_samp = np.hstack((x[gapStart - 1], x_samp))
+#         muS, sigS = smooth(A, H, Q, R, mu0, Sig0, y_hat_star)
+#         mu = np.array([m[0, 0] for m in muS])
+#         x_samp = x_hat + mu
+#         x_samp = np.hstack((x[gapStart - 1], x_samp))
 
-        fig.add_subplot(3, 3, i + 1)
-        plt.plot(x, color="black")
-        missingInds = np.arange(gapStart - 1, gapEnd + 2)
-        plt.plot(missingInds, x_samp, color="blue", linestyle="dashed")
+#         fig.add_subplot(3, 3, i + 1)
+#         plt.plot(x, color="black")
+#         missingInds = np.arange(gapStart - 1, gapEnd + 2)
+#         plt.plot(missingInds, x_samp, color="blue", linestyle="dashed")
 
-    plt.show()
+#     plt.show()

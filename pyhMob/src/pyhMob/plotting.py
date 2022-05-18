@@ -2,7 +2,7 @@ import pdb
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
-from tools import findPauses
+from .tools import findPauses
 
 # ------ settings ---------
 SAMP_LINE_WIDTH = 0.1

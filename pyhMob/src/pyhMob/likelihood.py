@@ -1,5 +1,5 @@
 import numpy as np
-from tools import cart2polar, getIncrements, getLinkFlightSeqs
+from .tools import cart2polar, getIncrements, getLinkFlightSeqs
 
 np.seterr(all='raise')
 

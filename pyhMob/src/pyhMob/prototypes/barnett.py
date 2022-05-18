@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import pdb
 import numpy as np
-from sampling import sampleData
+from ..sampling import sampleData
 # from imputation import fillGaps
 # from likelihood import getMLEs
-from plotting import TrajGraph, getLimits
-from tools import findPauses, findFlights, getPattern, findChunks
+from ..plotting import TrajGraph, getLimits
+from ..tools import findPauses, findFlights, getPattern, findChunks
 import scipy.stats as stats
 
 

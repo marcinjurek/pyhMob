@@ -1,0 +1,8 @@
+simulation-results/
+data/
+*.Rhistory
+__pycache__/
+barnett-code/
+old-files/
+prototypes.egg-info/
+*.egg-info/

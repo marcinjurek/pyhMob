@@ -1,7 +1,6 @@
-import pdb
 import numpy as np
 import matplotlib.pyplot as plt
-from plotting import TrajGraph, findPauses
+from .tools import findPauses
 from scipy.spatial import distance as dist
 # in all functions below pings is assumed to be an
 # N by 2 numpy array

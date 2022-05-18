@@ -1,9 +1,9 @@
 import warnings
 import numpy as np
 import scipy.stats as stats
-from prototypes.arima110imputation import smooth
-from prototypes.barnett import fillGapsBarnett
-from sampling import samplePauses
+from .prototypes.arima110imputation import smooth
+from .prototypes.barnett import fillGapsBarnett
+from .sampling import samplePauses
 # from likelihood import getMLEs
 
 
@@ -106,7 +106,7 @@ def fillGaps(pings, method, params=np.empty(0), stack=False, consolidate=False):
         filledPings = np.copy(pings)
         filledPings[np.where(pattern == 0), :] = fills
         fills = filledPings
-
+    pdb.set_trace()
     return(fills)
 
 

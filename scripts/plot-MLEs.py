@@ -29,17 +29,17 @@ if __name__ == "__main__":
                                       PROB_F, missingPatDist = "none",
                                       inclTimes = True)
 
-        #print(f"Perc. obs.: {100*pings.shape[0]/N}")
         M = getIncrements(pings)
         if pings.shape[0] == N:
             U = N
         p = getMLEsUnbiased(pings, U)
         MLEs[iterNo, :] = p
-        print(f"C: {p[0]:0.4}, SD: {p[1]:0.4}, Pp: {p[2]:0.4}, Pf: {p[3]:0.4}")
+        print(f"Iteration {iterNo}")
+        print(f"\tC: {p[0]:0.4}, SD: {p[1]:0.4}, Pp: {p[2]:0.4}, Pf: {p[3]:0.4}")
 
-    print("means")
+    print("MLE means:")
     print(MLEs.mean(axis=0))
-    print("std. dev")
+    print("MLE std. dev")
     print(MLEs.std(axis=0))
     ax1 = plt.subplot2grid((2, 4), (0, 0))
     ax1.hist(MLEs[:, 0], color="orange", bins=31)
